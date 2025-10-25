@@ -316,6 +316,7 @@ def main():
     parser.add_argument("--map-title", default="InSAR Target Locations", help="Map title")
     parser.add_argument("--save-html", default="insar_map.html", help="Output HTML map filename")
     parser.add_argument("--save-geojson", default="insar_points.geojson", help="Output GeoJSON filename")
+    parser.add_argument("--save-csv", default=None, help="Output CSV filename")
 
     args = parser.parse_args()
 
@@ -339,6 +340,9 @@ def main():
         df = filter_instrClass(df, types=args.instrClass, strict=args.strict)
     if args.owners:
         df = df[df["owner"].isin(args.owners)]
+
+    if args.save_csv:
+        df.to_csv(args.save_csv, index=False)
 
     # Plot map
     plot_insar_points_interactive(
