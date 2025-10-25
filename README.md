@@ -12,7 +12,7 @@ This small Python tool is designed to **filter and visualize InSAR target data**
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/HeikoRottebeel/InSAR_infrastructure_mapper
+git clone https://github.com/HeikoRotteveel/InSAR_infrastructure_mapper
 cd InSAR_infrastructure_mapper
 ```
 
