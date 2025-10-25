@@ -36,6 +36,12 @@ Basic usage (with default filters):
 ```
 python insar_mapper.py --file InSAR_designated_Target_Database.xlsx
 ```
+
+Or if this does not work:
+
+```
+.\venv\Scripts\python.exe insar_mapper.py --file InSAR_designated_Target_Database.xlsx
+```
 This will:
 
 - Filter only active, valid InSAR targets
