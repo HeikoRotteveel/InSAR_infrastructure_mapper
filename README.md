@@ -51,19 +51,20 @@ This will:
 
 Different arguments that can be used:
 
-| Argument           | Description                                                         | Default |
-|-------------------|---------------------------------------------------------------------|---------|
-| `--file`          | Path to the InSAR Excel database file (required)                    | None    |
-| `--countries`     | Country codes to filter (multiple allowed)                          | NLD BEL |
-| `--owners`        | Owners to filter (multiple allowed)                                 | None    |
-| `--instrClass`    | Instrument classes to filter (multiple allowed)                     | CR IGRS TR |
-| `--strict`        | Strict filtering for instrument classes (`True` or `False`)         | False   |
-| `--active`        | Only include active targets                                         | True    |
-| `--valid`         | Only include valid entries (`valid == True`)                        | True    |
-| `--background`    | Map tiles from: https://leaflet-extras.github.io/leaflet-providers/preview/) | Cartodb Positron |
-| `--map-title`     | Title displayed at the top of the map                               | InSAR Target Locations |
-| `--save-html`     | Output HTML filename for the interactive map                        | insar_map.html |
-| `--save-geojson`  | Output GeoJSON filename for points                                  | insar_points.geojson |
+| Argument         | Description                                                                  | Default                |
+|------------------|------------------------------------------------------------------------------|------------------------|
+| `--file`         | Path to the InSAR Excel database file (required)                             | None                   |
+| `--countries`    | Country codes to filter (multiple allowed)                                   | NLD BEL                |
+| `--owners`       | Owners to filter (multiple allowed)                                          | None                   |
+| `--instrClass`   | Instrument classes to filter (multiple allowed)                              | CR IGRS TR             |
+| `--strict`       | Strict filtering for instrument classes (`True` or `False`)                  | False                  |
+| `--active`       | Only include active targets                                                  | True                   |
+| `--valid`        | Only include valid entries (`valid == True`)                                 | True                   |
+| `--background`   | Map tiles from: https://leaflet-extras.github.io/leaflet-providers/preview/) | Cartodb Positron       |
+| `--map-title`    | Title displayed at the top of the map                                        | InSAR Target Locations |
+| `--save-html`    | Output HTML filename for the interactive map                                 | insar_map.html         |
+| `--save-geojson` | Output GeoJSON filename for points                                           | insar_points.geojson   |
+| `--save-csv`     | Output csv filename for points                                               | None                   |
 ---
 
 ## Examples

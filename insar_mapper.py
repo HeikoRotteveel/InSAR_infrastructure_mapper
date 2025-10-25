@@ -14,7 +14,8 @@ Usage:
         --map-title "Active InSAR Targets (NLD & BEL)" \
         --background "Cartodb Positron" \
         --save-html insar_map.html \
-        --save-geojson insar_points.geojson
+        --save-geojson insar_points.geojson \
+        --save-csv", insar_points.csv
 -------------
 Written by: Heiko Rotteveel (Delft University of Technology)
 Date: October 2025
