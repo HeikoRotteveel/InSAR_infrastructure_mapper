@@ -4,6 +4,7 @@ This small Python tool is designed to **filter and visualize InSAR target data**
 
 - An **HTML map** you can open in a browser.
 - A **GeoJSON file** containing all filtered points that can be used for further analysis in GIS tools.
+- (Optionally) A **CSV file** containing the relevant data from the Excel database file
 
 ---
 
