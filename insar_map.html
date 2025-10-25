@@ -1,0 +1,2510 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_6401da9dcae5df4904614e134f073020 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-dvf/0.3.0/leaflet-dvf.markers.min.js"></script>
+</head>
+<body>
+    
+    <h3 align='center' style='font-size:16px'><b>InSAR Target Locations</b></h3>
+    <div style='position: fixed; 
+                    bottom: 50px; 
+                    left: 50px; 
+                    width: 220px; 
+                    background-color: white; 
+                    border:2px solid grey; 
+                    z-index:9999; 
+                    font-size:12px; 
+                    padding: 10px;'> 
+                    <b>Legend</b><br><u>Owners</u><br><i style='background:#1f77b4;width:10px;height:10px;float:left;margin-right:6px;border:1px solid grey'></i>Deltares<br><i style='background:#ff7f0e;width:10px;height:10px;float:left;margin-right:6px;border:1px solid grey'></i>HSR<br><i style='background:#2ca02c;width:10px;height:10px;float:left;margin-right:6px;border:1px solid grey'></i>NAM<br><i style='background:#d62728;width:10px;height:10px;float:left;margin-right:6px;border:1px solid grey'></i>NGI<br><i style='background:#9467bd;width:10px;height:10px;float:left;margin-right:6px;border:1px solid grey'></i>NSGI<br><i style='background:#8c564b;width:10px;height:10px;float:left;margin-right:6px;border:1px solid grey'></i>RWS<br><i style='background:#e377c2;width:10px;height:10px;float:left;margin-right:6px;border:1px solid grey'></i>TUD<br><i style='background:#7f7f7f;width:10px;height:10px;float:left;margin-right:6px;border:1px solid grey'></i>Waternet<br><br><u>Instrument Class</u><br>&#9679; CR (circle)<br>&#9679; IGRS (triangle)<br>&#9679; TR (square)<br></div>
+    
+            <div class="folium-map" id="map_6401da9dcae5df4904614e134f073020" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_6401da9dcae5df4904614e134f073020 = L.map(
+                "map_6401da9dcae5df4904614e134f073020",
+                {
+                    center: [52.58634483811765, 5.82278126289706],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_cd444d168e7a989210f01ca123f0342b = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_cd444d168e7a989210f01ca123f0342b.addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+            var circle_marker_15ef2fb113bc2014a01ff1fbfd59b8ab = L.circleMarker(
+                [51.972431095, 4.925093121],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_a54eaa6c7fffafa1620f486c9d9b466f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3ddd7232c8dea54d3abf93b27770e7e2 = $(`<div id="html_3ddd7232c8dea54d3abf93b27770e7e2" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> CABAUW<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_a54eaa6c7fffafa1620f486c9d9b466f.setContent(html_3ddd7232c8dea54d3abf93b27770e7e2);
+            
+        
+
+        circle_marker_15ef2fb113bc2014a01ff1fbfd59b8ab.bindPopup(popup_a54eaa6c7fffafa1620f486c9d9b466f)
+        ;
+
+        
+    
+    
+            var circle_marker_bed1db4c73b7a87717c7d04e75a1fb4d = L.circleMarker(
+                [53.443845156, 5.727855241],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_03c5da7e11ba3fa3377ada8f1ff12633 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_16ed680adc5a251fc4b64ae677d8a3a4 = $(`<div id="html_16ed680adc5a251fc4b64ae677d8a3a4" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> AMELAND<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_03c5da7e11ba3fa3377ada8f1ff12633.setContent(html_16ed680adc5a251fc4b64ae677d8a3a4);
+            
+        
+
+        circle_marker_bed1db4c73b7a87717c7d04e75a1fb4d.bindPopup(popup_03c5da7e11ba3fa3377ada8f1ff12633)
+        ;
+
+        
+    
+    
+            var circle_marker_dcc2e437b5a5152abccc116d85b56a29 = L.circleMarker(
+                [52.711562619, 6.194517986],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_6231a75192e75ffd8e9a9b0c61965db4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c19bbe475dffbf7f3e24a4e9d6703568 = $(`<div id="html_c19bbe475dffbf7f3e24a4e9d6703568" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> MEPPEL<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_6231a75192e75ffd8e9a9b0c61965db4.setContent(html_c19bbe475dffbf7f3e24a4e9d6703568);
+            
+        
+
+        circle_marker_dcc2e437b5a5152abccc116d85b56a29.bindPopup(popup_6231a75192e75ffd8e9a9b0c61965db4)
+        ;
+
+        
+    
+    
+            var circle_marker_509c844b4ea7ad778750d44f6e73399d = L.circleMarker(
+                [51.668798386, 3.723589517],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_e14ceb7d0af24b6cf45c21a9e8e60a03 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2fb5558f535e57337306bd526868b97a = $(`<div id="html_2fb5558f535e57337306bd526868b97a" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> DAMAANZET SCHOUWEN<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_e14ceb7d0af24b6cf45c21a9e8e60a03.setContent(html_2fb5558f535e57337306bd526868b97a);
+            
+        
+
+        circle_marker_509c844b4ea7ad778750d44f6e73399d.bindPopup(popup_e14ceb7d0af24b6cf45c21a9e8e60a03)
+        ;
+
+        
+    
+    
+            var circle_marker_81e7971d626571c15926e5d9e7bb4886 = L.circleMarker(
+                [51.512967864, 4.966403174],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_7be1c8eb181d1165a37f6f7f979d32d7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4ca42bb7f16008c76e95a31c3bf26793 = $(`<div id="html_4ca42bb7f16008c76e95a31c3bf26793" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ALPHEN<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_7be1c8eb181d1165a37f6f7f979d32d7.setContent(html_4ca42bb7f16008c76e95a31c3bf26793);
+            
+        
+
+        circle_marker_81e7971d626571c15926e5d9e7bb4886.bindPopup(popup_7be1c8eb181d1165a37f6f7f979d32d7)
+        ;
+
+        
+    
+    
+            var circle_marker_761778c9923386178b885922fc4ee62c = L.circleMarker(
+                [50.754777338, 5.700571975],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_941287e9bd2ba96a772a6b21634d76a6 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_aa7c423c826189d62a2f51f42913ea9c = $(`<div id="html_aa7c423c826189d62a2f51f42913ea9c" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> MOELINGEN (BE)<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> BEL</div>`)[0];
+                popup_941287e9bd2ba96a772a6b21634d76a6.setContent(html_aa7c423c826189d62a2f51f42913ea9c);
+            
+        
+
+        circle_marker_761778c9923386178b885922fc4ee62c.bindPopup(popup_941287e9bd2ba96a772a6b21634d76a6)
+        ;
+
+        
+    
+    
+            var circle_marker_3e6c31998073fa6c3262ec117882f0c5 = L.circleMarker(
+                [52.261822302, 5.474171246],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_f25685cd0e7dfe470ce38372d24fea0c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2f88673172385c2e7e448446e77e21f7 = $(`<div id="html_2f88673172385c2e7e448446e77e21f7" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> NIJKERK<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_f25685cd0e7dfe470ce38372d24fea0c.setContent(html_2f88673172385c2e7e448446e77e21f7);
+            
+        
+
+        circle_marker_3e6c31998073fa6c3262ec117882f0c5.bindPopup(popup_f25685cd0e7dfe470ce38372d24fea0c)
+        ;
+
+        
+    
+    
+            var circle_marker_12c64d49f499060f0066e2a0f3d74d42 = L.circleMarker(
+                [52.119553058, 4.313724306],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_40e8582756cd50cae957446f8feda920 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cce964e95c196ace3c4c27ca89ea2032 = $(`<div id="html_cce964e95c196ace3c4c27ca89ea2032" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> SCHEVENINGEN<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_40e8582756cd50cae957446f8feda920.setContent(html_cce964e95c196ace3c4c27ca89ea2032);
+            
+        
+
+        circle_marker_12c64d49f499060f0066e2a0f3d74d42.bindPopup(popup_40e8582756cd50cae957446f8feda920)
+        ;
+
+        
+    
+    
+            var circle_marker_70596203bbaac07abb15cd507424c22a = L.circleMarker(
+                [52.313708891, 5.00447666],
+                {"bubblingMouseEvents": true, "color": "#7f7f7f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7f7f7f", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_346347ab7ba8f004ea6b4d5b4a5ac3e7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c9592753d784e2603411278a6882d1a6 = $(`<div id="html_c9592753d784e2603411278a6882d1a6" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> GAASPERDAM<br><b>owner:</b> Waternet<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_346347ab7ba8f004ea6b4d5b4a5ac3e7.setContent(html_c9592753d784e2603411278a6882d1a6);
+            
+        
+
+        circle_marker_70596203bbaac07abb15cd507424c22a.bindPopup(popup_346347ab7ba8f004ea6b4d5b4a5ac3e7)
+        ;
+
+        
+    
+    
+            var circle_marker_00cd68f3ea047619f6c11c2cb53739b5 = L.circleMarker(
+                [52.313206869, 5.004569998],
+                {"bubblingMouseEvents": true, "color": "#7f7f7f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7f7f7f", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_6aff53751a4620aff21461758c86cb17 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_fd50d45548a4e9b7530f5546e08b3f2d = $(`<div id="html_fd50d45548a4e9b7530f5546e08b3f2d" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> GAASPERDAM<br><b>owner:</b> Waternet<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_6aff53751a4620aff21461758c86cb17.setContent(html_fd50d45548a4e9b7530f5546e08b3f2d);
+            
+        
+
+        circle_marker_00cd68f3ea047619f6c11c2cb53739b5.bindPopup(popup_6aff53751a4620aff21461758c86cb17)
+        ;
+
+        
+    
+    
+            var circle_marker_d66b2eb6d1aebe93b95d758ebc6f8d7c = L.circleMarker(
+                [52.883141997, 4.86979271],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_9bfd8fe74c056987a6e6c65a6c4087e7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_78c15ba409f5e9cc8e550e0d8022ec51 = $(`<div id="html_78c15ba409f5e9cc8e550e0d8022ec51" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> EWIJCKSLUIS<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_9bfd8fe74c056987a6e6c65a6c4087e7.setContent(html_78c15ba409f5e9cc8e550e0d8022ec51);
+            
+        
+
+        circle_marker_d66b2eb6d1aebe93b95d758ebc6f8d7c.bindPopup(popup_9bfd8fe74c056987a6e6c65a6c4087e7)
+        ;
+
+        
+    
+    
+            var circle_marker_0d72324b8fa0a40570635c2c7b4b0b4f = L.circleMarker(
+                [52.265555882, 6.757792233],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_a63ef99afe7bb961cb886122f5d7833e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8a12b3f1353657fe39f9bf80ea7c4f4f = $(`<div id="html_8a12b3f1353657fe39f9bf80ea7c4f4f" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> HENGELO<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_a63ef99afe7bb961cb886122f5d7833e.setContent(html_8a12b3f1353657fe39f9bf80ea7c4f4f);
+            
+        
+
+        circle_marker_0d72324b8fa0a40570635c2c7b4b0b4f.bindPopup(popup_a63ef99afe7bb961cb886122f5d7833e)
+        ;
+
+        
+    
+    
+            var circle_marker_dd24b3ecd295919f0684c5e11bf783af = L.circleMarker(
+                [51.784916801, 5.87914247],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_c93090a8bb1555b7fd934b7d0454fde8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_eb297237d430cd2e333c5759794ddbbd = $(`<div id="html_eb297237d430cd2e333c5759794ddbbd" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> NIJMEGEN<br><b>owner:</b> RWS<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_c93090a8bb1555b7fd934b7d0454fde8.setContent(html_eb297237d430cd2e333c5759794ddbbd);
+            
+        
+
+        circle_marker_dd24b3ecd295919f0684c5e11bf783af.bindPopup(popup_c93090a8bb1555b7fd934b7d0454fde8)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_aa88a4dafe48511831f391971aa14537 = new L.RegularPolygonMarker(
+                [53.31024, 6.677866],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_d349e650923cf25293b9bbd42258c8b4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ee5f92fd40b16cff4592b618935417f0 = $(`<div id="html_ee5f92fd40b16cff4592b618935417f0" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> BARNHEEM<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_d349e650923cf25293b9bbd42258c8b4.setContent(html_ee5f92fd40b16cff4592b618935417f0);
+            
+        
+
+        regular_polygon_marker_aa88a4dafe48511831f391971aa14537.bindPopup(popup_d349e650923cf25293b9bbd42258c8b4)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_c783cf6818c5bbcd675e2009e9046dfe = new L.RegularPolygonMarker(
+                [53.29967, 6.565937],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_ebdffa145587870d19d6791404af6587 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_394539605a35886a6ae5fd41d2fb0dfb = $(`<div id="html_394539605a35886a6ae5fd41d2fb0dfb" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> BEDUM<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_ebdffa145587870d19d6791404af6587.setContent(html_394539605a35886a6ae5fd41d2fb0dfb);
+            
+        
+
+        regular_polygon_marker_c783cf6818c5bbcd675e2009e9046dfe.bindPopup(popup_ebdffa145587870d19d6791404af6587)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_5918b975f473b2057303cb89c4b298dd = new L.RegularPolygonMarker(
+                [53.162371, 7.096213],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_2813232068462feeaa371bc78e92dea4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_aa76ced6acf0f2667bec300f7a1e7ee1 = $(`<div id="html_aa76ced6acf0f2667bec300f7a1e7ee1" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> BEERTA<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_2813232068462feeaa371bc78e92dea4.setContent(html_aa76ced6acf0f2667bec300f7a1e7ee1);
+            
+        
+
+        regular_polygon_marker_5918b975f473b2057303cb89c4b298dd.bindPopup(popup_2813232068462feeaa371bc78e92dea4)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_30aeeba62d30422ac0a06497c851931d = new L.RegularPolygonMarker(
+                [53.374472, 6.887139],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_537fe41a5906b261a1ef85f631b781a0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ccc3e19f184fcbec4d59532e26eb9dba = $(`<div id="html_ccc3e19f184fcbec4d59532e26eb9dba" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> BIERUM<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_537fe41a5906b261a1ef85f631b781a0.setContent(html_ccc3e19f184fcbec4d59532e26eb9dba);
+            
+        
+
+        regular_polygon_marker_30aeeba62d30422ac0a06497c851931d.bindPopup(popup_537fe41a5906b261a1ef85f631b781a0)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_e94d758bbb836938d07938ff84242e9c = new L.RegularPolygonMarker(
+                [53.096139, 7.05451],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_4f9c8bc02ad27859195a8ef5b0929b01 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b0addb855733d441f533b6ad8e29ed09 = $(`<div id="html_b0addb855733d441f533b6ad8e29ed09" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> BLIJHAM<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_4f9c8bc02ad27859195a8ef5b0929b01.setContent(html_b0addb855733d441f533b6ad8e29ed09);
+            
+        
+
+        regular_polygon_marker_e94d758bbb836938d07938ff84242e9c.bindPopup(popup_4f9c8bc02ad27859195a8ef5b0929b01)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_d77b0c6dd815862c93deb27a25ce4bc4 = new L.RegularPolygonMarker(
+                [53.289366, 7.01572],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_8e5a8450227664ca4731fa2933e2e46c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b5dec80f87cf39e626e5ffa467c3688c = $(`<div id="html_b5dec80f87cf39e626e5ffa467c3688c" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> BORGSWEER<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_8e5a8450227664ca4731fa2933e2e46c.setContent(html_b5dec80f87cf39e626e5ffa467c3688c);
+            
+        
+
+        regular_polygon_marker_d77b0c6dd815862c93deb27a25ce4bc4.bindPopup(popup_8e5a8450227664ca4731fa2933e2e46c)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_367ab0dd5318d24fcfcc30dffd2ec6c4 = new L.RegularPolygonMarker(
+                [53.024177, 6.763256],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_7f81502f0fec86b09721f16f8f645000 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_46e180384362e5c3baebe663284bb2ff = $(`<div id="html_46e180384362e5c3baebe663284bb2ff" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> EEXT<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_7f81502f0fec86b09721f16f8f645000.setContent(html_46e180384362e5c3baebe663284bb2ff);
+            
+        
+
+        regular_polygon_marker_367ab0dd5318d24fcfcc30dffd2ec6c4.bindPopup(popup_7f81502f0fec86b09721f16f8f645000)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_c3c5a9a5f617981d59ab929f053e3da7 = new L.RegularPolygonMarker(
+                [53.410856, 6.871596],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_782fd0947e04fc3587f09831c970f5d4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_102c4373d546f295c8abfc71bc64aaca = $(`<div id="html_102c4373d546f295c8abfc71bc64aaca" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> EEMSHAVEN<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_782fd0947e04fc3587f09831c970f5d4.setContent(html_102c4373d546f295c8abfc71bc64aaca);
+            
+        
+
+        regular_polygon_marker_c3c5a9a5f617981d59ab929f053e3da7.bindPopup(popup_782fd0947e04fc3587f09831c970f5d4)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_f7155e78bce17ca962f840535a22f5d3 = new L.RegularPolygonMarker(
+                [53.212749, 6.643736],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_2e8ef39461ef13c46ed3d3916c3bfbc0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_69b1ce6db266ac1070afa7662cd13eac = $(`<div id="html_69b1ce6db266ac1070afa7662cd13eac" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ENGELBERT (G69)<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_2e8ef39461ef13c46ed3d3916c3bfbc0.setContent(html_69b1ce6db266ac1070afa7662cd13eac);
+            
+        
+
+        regular_polygon_marker_f7155e78bce17ca962f840535a22f5d3.bindPopup(popup_2e8ef39461ef13c46ed3d3916c3bfbc0)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_bc1f778cf6ebf71b74a98cfc1d8a371e = new L.RegularPolygonMarker(
+                [53.212964, 7.122096],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_06fdf79c091c82fbc8d1dc6abc895499 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1606c99dd85cc369dfbd7720708cc9ed = $(`<div id="html_1606c99dd85cc369dfbd7720708cc9ed" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> GANZEDIJK<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_06fdf79c091c82fbc8d1dc6abc895499.setContent(html_1606c99dd85cc369dfbd7720708cc9ed);
+            
+        
+
+        regular_polygon_marker_bc1f778cf6ebf71b74a98cfc1d8a371e.bindPopup(popup_06fdf79c091c82fbc8d1dc6abc895499)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_21d5fa870e86fe7de114174c7491d272 = new L.RegularPolygonMarker(
+                [53.148316, 6.604645],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_c7103a97cac1bc177633e4542f5fdf55 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a3489124682365ca58e5e010d3e1b04e = $(`<div id="html_a3489124682365ca58e5e010d3e1b04e" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> HAREN (G66)<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_c7103a97cac1bc177633e4542f5fdf55.setContent(html_a3489124682365ca58e5e010d3e1b04e);
+            
+        
+
+        regular_polygon_marker_21d5fa870e86fe7de114174c7491d272.bindPopup(popup_c7103a97cac1bc177633e4542f5fdf55)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_1a5618c236015aa8a6758324cff8913d = new L.RegularPolygonMarker(
+                [53.156712, 6.984071],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_210d56e7bfa3f70ea8b8f58e0cc801ef = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_59e687ea19ea4fb1c2e50f8603954850 = $(`<div id="html_59e687ea19ea4fb1c2e50f8603954850" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> HEILIGERLEE<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_210d56e7bfa3f70ea8b8f58e0cc801ef.setContent(html_59e687ea19ea4fb1c2e50f8603954850);
+            
+        
+
+        regular_polygon_marker_1a5618c236015aa8a6758324cff8913d.bindPopup(popup_210d56e7bfa3f70ea8b8f58e0cc801ef)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_470d3e0fc9d6f92ed0406a23d2d22205 = new L.RegularPolygonMarker(
+                [53.123675, 6.747044],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_c436181b1254ca249031f3087a1b44f7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c7b194bd203c8b75324b1585b4755366 = $(`<div id="html_c7b194bd203c8b75324b1585b4755366" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> HOOGEZAND<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_c436181b1254ca249031f3087a1b44f7.setContent(html_c7b194bd203c8b75324b1585b4755366);
+            
+        
+
+        regular_polygon_marker_470d3e0fc9d6f92ed0406a23d2d22205.bindPopup(popup_c436181b1254ca249031f3087a1b44f7)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_a780a4c18ed3e7b51b291a4f46e6e4ab = new L.RegularPolygonMarker(
+                [53.179107, 6.724373],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_1d91c277770d7f85f49d7434a3e7fec0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6842d8727750540a758505abe259583d = $(`<div id="html_6842d8727750540a758505abe259583d" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> KOLHAM-1<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_1d91c277770d7f85f49d7434a3e7fec0.setContent(html_6842d8727750540a758505abe259583d);
+            
+        
+
+        regular_polygon_marker_a780a4c18ed3e7b51b291a4f46e6e4ab.bindPopup(popup_1d91c277770d7f85f49d7434a3e7fec0)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_b888baa4fe58637255c5231bb640286d = new L.RegularPolygonMarker(
+                [53.351679, 6.817253],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_e159d69417f47360c8aefb637547f3d5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c3d899cc99031bf3e2ba38e8ef63bfd9 = $(`<div id="html_c3d899cc99031bf3e2ba38e8ef63bfd9" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> LEERMENS<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_e159d69417f47360c8aefb637547f3d5.setContent(html_c3d899cc99031bf3e2ba38e8ef63bfd9);
+            
+        
+
+        regular_polygon_marker_b888baa4fe58637255c5231bb640286d.bindPopup(popup_e159d69417f47360c8aefb637547f3d5)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_39957e2e4e3dbea64ca7e4d7efa32a17 = new L.RegularPolygonMarker(
+                [53.117537, 6.677503],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_3759f8822a8969c6d30045538e8c2ffe = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f7a23ef085d00b37dc27135e93b2e311 = $(`<div id="html_f7a23ef085d00b37dc27135e93b2e311" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> MIDLAREN<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_3759f8822a8969c6d30045538e8c2ffe.setContent(html_f7a23ef085d00b37dc27135e93b2e311);
+            
+        
+
+        regular_polygon_marker_39957e2e4e3dbea64ca7e4d7efa32a17.bindPopup(popup_3759f8822a8969c6d30045538e8c2ffe)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_8d15a648b912ecba4dff45c4f6d208d2 = new L.RegularPolygonMarker(
+                [53.111914, 6.402773],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_55c38d2dc89c008abc95b1eccc4467d5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0b8b2264f4802c3fd4af3bf527bfec13 = $(`<div id="html_0b8b2264f4802c3fd4af3bf527bfec13" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> NORG-3<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_55c38d2dc89c008abc95b1eccc4467d5.setContent(html_0b8b2264f4802c3fd4af3bf527bfec13);
+            
+        
+
+        regular_polygon_marker_8d15a648b912ecba4dff45c4f6d208d2.bindPopup(popup_55c38d2dc89c008abc95b1eccc4467d5)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_9811d8f0932f586a9c2cb936799049f6 = new L.RegularPolygonMarker(
+                [53.395537, 6.644096],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_6ae49c392f1e5c1fbcf96d0cba24e40d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_09b88b61040cb1d0c8c2e85bb3b7c80b = $(`<div id="html_09b88b61040cb1d0c8c2e85bb3b7c80b" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> OLDORP<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_6ae49c392f1e5c1fbcf96d0cba24e40d.setContent(html_09b88b61040cb1d0c8c2e85bb3b7c80b);
+            
+        
+
+        regular_polygon_marker_9811d8f0932f586a9c2cb936799049f6.bindPopup(popup_6ae49c392f1e5c1fbcf96d0cba24e40d)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_d68b27235d9b08d6939f46d789235529 = new L.RegularPolygonMarker(
+                [53.220982, 7.037459],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_ff38703ef8bfb3b675ed7e970642129f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_20c3042e0ab49d429f040b725625ab2c = $(`<div id="html_20c3042e0ab49d429f040b725625ab2c" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> OOSTWOLD<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_ff38703ef8bfb3b675ed7e970642129f.setContent(html_20c3042e0ab49d429f040b725625ab2c);
+            
+        
+
+        regular_polygon_marker_d68b27235d9b08d6939f46d789235529.bindPopup(popup_ff38703ef8bfb3b675ed7e970642129f)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_6e2cc6f0ac8f7fb9d3378ecc70ab3d9e = new L.RegularPolygonMarker(
+                [53.301947, 6.740189],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_9e078a59640d5e7e3922bf00e98c8c10 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a508f3c2e6e8c5c3fbd4fc1930c6fbdf = $(`<div id="html_a508f3c2e6e8c5c3fbd4fc1930c6fbdf" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> TEN POST<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_9e078a59640d5e7e3922bf00e98c8c10.setContent(html_a508f3c2e6e8c5c3fbd4fc1930c6fbdf);
+            
+        
+
+        regular_polygon_marker_6e2cc6f0ac8f7fb9d3378ecc70ab3d9e.bindPopup(popup_9e078a59640d5e7e3922bf00e98c8c10)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_436e6662162af1ff5839964d97b1b3c3 = new L.RegularPolygonMarker(
+                [53.332773, 6.500928],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_800bb9475c9174c5f6eb55cdb5070059 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_32e07c4e2cbd0b61ee3e8c90cd241838 = $(`<div id="html_32e07c4e2cbd0b61ee3e8c90cd241838" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> RANUM<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_800bb9475c9174c5f6eb55cdb5070059.setContent(html_32e07c4e2cbd0b61ee3e8c90cd241838);
+            
+        
+
+        regular_polygon_marker_436e6662162af1ff5839964d97b1b3c3.bindPopup(popup_800bb9475c9174c5f6eb55cdb5070059)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_30ec4df3a57d22cfc626b4968f3985ac = new L.RegularPolygonMarker(
+                [53.136378, 6.449287],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_c6dd73461bc6a83f15b022b8386c6b6e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e0b865a4f5460f0a7f7c5dc140312d91 = $(`<div id="html_e0b865a4f5460f0a7f7c5dc140312d91" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> RODEN-1<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_c6dd73461bc6a83f15b022b8386c6b6e.setContent(html_e0b865a4f5460f0a7f7c5dc140312d91);
+            
+        
+
+        regular_polygon_marker_30ec4df3a57d22cfc626b4968f3985ac.bindPopup(popup_c6dd73461bc6a83f15b022b8386c6b6e)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_68c8ecccb90cfe66a21bb6085c8ce337 = new L.RegularPolygonMarker(
+                [53.156121, 6.800366],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_3eef78191b8f6f7ffab2dc96506ed1ea = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_01a092dc910810a2198373c05bc5d1a6 = $(`<div id="html_01a092dc910810a2198373c05bc5d1a6" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> SAPPEMEER<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_3eef78191b8f6f7ffab2dc96506ed1ea.setContent(html_01a092dc910810a2198373c05bc5d1a6);
+            
+        
+
+        regular_polygon_marker_68c8ecccb90cfe66a21bb6085c8ce337.bindPopup(popup_3eef78191b8f6f7ffab2dc96506ed1ea)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_55942320fcea3df5acfbb3e1fd53b672 = new L.RegularPolygonMarker(
+                [53.24231, 6.815157],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_1954d7635ebf5fbda0937208195e1f9f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5d17fc2dbf0e4572f383772ba582b38a = $(`<div id="html_5d17fc2dbf0e4572f383772ba582b38a" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> SCHILDWOLDE<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_1954d7635ebf5fbda0937208195e1f9f.setContent(html_5d17fc2dbf0e4572f383772ba582b38a);
+            
+        
+
+        regular_polygon_marker_55942320fcea3df5acfbb3e1fd53b672.bindPopup(popup_1954d7635ebf5fbda0937208195e1f9f)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_45ee4281a2c3bfddd43d9ba2b38e1f84 = new L.RegularPolygonMarker(
+                [53.261567, 6.48201],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_b85316e262ba635b3fd1f80f1144e5cc = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3f4af79c158e1fc375a8a1caff98e703 = $(`<div id="html_3f4af79c158e1fc375a8a1caff98e703" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> STEENTIL<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_b85316e262ba635b3fd1f80f1144e5cc.setContent(html_3f4af79c158e1fc375a8a1caff98e703);
+            
+        
+
+        regular_polygon_marker_45ee4281a2c3bfddd43d9ba2b38e1f84.bindPopup(popup_b85316e262ba635b3fd1f80f1144e5cc)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_8a91ed69948114616aac9574e4b45a51 = new L.RegularPolygonMarker(
+                [53.44943, 6.806518],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_7d9843df75398137ad4d4a369d856d89 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_92e867b764028843a4ab639604cae4ba = $(`<div id="html_92e867b764028843a4ab639604cae4ba" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> UITHUIZERMEEDEN<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_7d9843df75398137ad4d4a369d856d89.setContent(html_92e867b764028843a4ab639604cae4ba);
+            
+        
+
+        regular_polygon_marker_8a91ed69948114616aac9574e4b45a51.bindPopup(popup_7d9843df75398137ad4d4a369d856d89)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_1e4c9f9bca04e7637d3758b642a8fa0a = new L.RegularPolygonMarker(
+                [53.405358, 6.54504],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_1ae6bc024271a861109670d383f00e55 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6a9e028ef6f18cee804729be61a33fa0 = $(`<div id="html_6a9e028ef6f18cee804729be61a33fa0" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> WARFFUM<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_1ae6bc024271a861109670d383f00e55.setContent(html_6a9e028ef6f18cee804729be61a33fa0);
+            
+        
+
+        regular_polygon_marker_1e4c9f9bca04e7637d3758b642a8fa0a.bindPopup(popup_1ae6bc024271a861109670d383f00e55)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_f5654527330422a69124fd712445867f = new L.RegularPolygonMarker(
+                [53.406401, 6.481656],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_3e98369d7ba524e443b803cf8116e1e2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f4ad0f68c1657b7aadfc1b49462b50f8 = $(`<div id="html_f4ad0f68c1657b7aadfc1b49462b50f8" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> WESTERNIELAND<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_3e98369d7ba524e443b803cf8116e1e2.setContent(html_f4ad0f68c1657b7aadfc1b49462b50f8);
+            
+        
+
+        regular_polygon_marker_f5654527330422a69124fd712445867f.bindPopup(popup_3e98369d7ba524e443b803cf8116e1e2)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_cc4969b4c191dba8f51c8e8c353a06d5 = new L.RegularPolygonMarker(
+                [53.085307, 6.747812],
+                {
+  "stroke": true,
+  "color": "#2ca02c",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#2ca02c",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_263d99c7b878091963b59597dbd65110 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ecc9074ea1cc63607d400c835643e035 = $(`<div id="html_ecc9074ea1cc63607d400c835643e035" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ZUIDLAARDERVEEN<br><b>owner:</b> NAM<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_263d99c7b878091963b59597dbd65110.setContent(html_ecc9074ea1cc63607d400c835643e035);
+            
+        
+
+        regular_polygon_marker_cc4969b4c191dba8f51c8e8c353a06d5.bindPopup(popup_263d99c7b878091963b59597dbd65110)
+        ;
+
+        
+    
+    
+            var circle_marker_13fd1c6b290c7431d8340d85d16b4fd9 = L.circleMarker(
+                [52.12220641, 4.38901537],
+                {"bubblingMouseEvents": true, "color": "#e377c2", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e377c2", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_61915316bae846af11e4f347dfb39158 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_91df0413f2d1062f7c6dc6fa8e749564 = $(`<div id="html_91df0413f2d1062f7c6dc6fa8e749564" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> WASSENAAR<br><b>owner:</b> TUD<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_61915316bae846af11e4f347dfb39158.setContent(html_91df0413f2d1062f7c6dc6fa8e749564);
+            
+        
+
+        circle_marker_13fd1c6b290c7431d8340d85d16b4fd9.bindPopup(popup_61915316bae846af11e4f347dfb39158)
+        ;
+
+        
+    
+    
+            var circle_marker_df57f8bc48910f7a6f3e43c86a6964d6 = L.circleMarker(
+                [52.12224247, 4.38893272],
+                {"bubblingMouseEvents": true, "color": "#e377c2", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e377c2", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_dd59aa132987f6a251d7a1abe62c7683 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_acc70e52640b2923976afe278ca1cf0c = $(`<div id="html_acc70e52640b2923976afe278ca1cf0c" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> WASSENAAR<br><b>owner:</b> TUD<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_dd59aa132987f6a251d7a1abe62c7683.setContent(html_acc70e52640b2923976afe278ca1cf0c);
+            
+        
+
+        circle_marker_df57f8bc48910f7a6f3e43c86a6964d6.bindPopup(popup_dd59aa132987f6a251d7a1abe62c7683)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_822138e2dbc2bf2ae870ae7010f63164 = new L.RegularPolygonMarker(
+                [52.12195395, 4.38848089],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_22a479e80fd071aaee962ea98b14b4dd = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ad8076ea11afe094cf49548dff878b48 = $(`<div id="html_ad8076ea11afe094cf49548dff878b48" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> WASSENAAR<br><b>owner:</b> TUD<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_22a479e80fd071aaee962ea98b14b4dd.setContent(html_ad8076ea11afe094cf49548dff878b48);
+            
+        
+
+        regular_polygon_marker_822138e2dbc2bf2ae870ae7010f63164.bindPopup(popup_22a479e80fd071aaee962ea98b14b4dd)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_69b94f07ae06589e6024d749469a43dc = new L.RegularPolygonMarker(
+                [52.12136109, 4.38937711],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_91d6c843e1542ad2c1e7bd218d027948 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0ffdaf24830839c93b1d32294c95d705 = $(`<div id="html_0ffdaf24830839c93b1d32294c95d705" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> WASSENAAR<br><b>owner:</b> TUD<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_91d6c843e1542ad2c1e7bd218d027948.setContent(html_0ffdaf24830839c93b1d32294c95d705);
+            
+        
+
+        regular_polygon_marker_69b94f07ae06589e6024d749469a43dc.bindPopup(popup_91d6c843e1542ad2c1e7bd218d027948)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_c67839ebe58a7dd7e52f00dbdedc4b8e = new L.RegularPolygonMarker(
+                [52.12190956, 4.38942611],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 4,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_bba7435581d32e5e12f1033f4373c9dd = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_94f082235151fbdd7e67f9e02d6dbca4 = $(`<div id="html_94f082235151fbdd7e67f9e02d6dbca4" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> WASSENAAR<br><b>owner:</b> TUD<br><b>instrClass:</b> TR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_bba7435581d32e5e12f1033f4373c9dd.setContent(html_94f082235151fbdd7e67f9e02d6dbca4);
+            
+        
+
+        regular_polygon_marker_c67839ebe58a7dd7e52f00dbdedc4b8e.bindPopup(popup_bba7435581d32e5e12f1033f4373c9dd)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_339f8d8c6d31465ea17cbc49b55b4ffc = new L.RegularPolygonMarker(
+                [52.12169717, 4.38896942],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 4,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_2f552b51eb210fe9e8e3251e1887da45 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3fd8ad5e26990a5e7ac3601131c61769 = $(`<div id="html_3fd8ad5e26990a5e7ac3601131c61769" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> WASSENAAR<br><b>owner:</b> TUD<br><b>instrClass:</b> TR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_2f552b51eb210fe9e8e3251e1887da45.setContent(html_3fd8ad5e26990a5e7ac3601131c61769);
+            
+        
+
+        regular_polygon_marker_339f8d8c6d31465ea17cbc49b55b4ffc.bindPopup(popup_2f552b51eb210fe9e8e3251e1887da45)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_f4c2efd70b88933303f1749b2061e4bc = new L.RegularPolygonMarker(
+                [51.969544, 4.92618],
+                {
+  "stroke": true,
+  "color": "#9467bd",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#9467bd",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_bd7bd5d2f447decc9cbd1454848ef8b4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b47b64e3e996a8f1b160eaf848cdf6c1 = $(`<div id="html_b47b64e3e996a8f1b160eaf848cdf6c1" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> CABAUW<br><b>owner:</b> NSGI<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_bd7bd5d2f447decc9cbd1454848ef8b4.setContent(html_b47b64e3e996a8f1b160eaf848cdf6c1);
+            
+        
+
+        regular_polygon_marker_f4c2efd70b88933303f1749b2061e4bc.bindPopup(popup_bd7bd5d2f447decc9cbd1454848ef8b4)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_62f0b53132e2150ba6e3bd22e182cb39 = new L.RegularPolygonMarker(
+                [52.137794472, 4.839190558],
+                {
+  "stroke": true,
+  "color": "#1f77b4",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#1f77b4",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_7da88b5ef6992503a6d1c57b81628579 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_50d4af8503aaec0dfc7f95c31b92d2f8 = $(`<div id="html_50d4af8503aaec0dfc7f95c31b92d2f8" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ZEGVELD<br><b>owner:</b> Deltares<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_7da88b5ef6992503a6d1c57b81628579.setContent(html_50d4af8503aaec0dfc7f95c31b92d2f8);
+            
+        
+
+        regular_polygon_marker_62f0b53132e2150ba6e3bd22e182cb39.bindPopup(popup_7da88b5ef6992503a6d1c57b81628579)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_4431e8d46aafde92897928af19cada0a = new L.RegularPolygonMarker(
+                [52.606294, 6.107909],
+                {
+  "stroke": true,
+  "color": "#1f77b4",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#1f77b4",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_d91027f9cd4a35be9cb9a2392b7839e2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0e8134c18b369a4e64e13a79fab2ef8f = $(`<div id="html_0e8134c18b369a4e64e13a79fab2ef8f" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ROUVEEN<br><b>owner:</b> Deltares<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_d91027f9cd4a35be9cb9a2392b7839e2.setContent(html_0e8134c18b369a4e64e13a79fab2ef8f);
+            
+        
+
+        regular_polygon_marker_4431e8d46aafde92897928af19cada0a.bindPopup(popup_d91027f9cd4a35be9cb9a2392b7839e2)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_bf6218d0a9936b14f7e2556973779aa0 = new L.RegularPolygonMarker(
+                [50.76313997, 5.93107257],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_ce432e1d557f82e823d0bc0bfcc971d2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f58dafc313d936a7eae1bcbb26a21d04 = $(`<div id="html_f58dafc313d936a7eae1bcbb26a21d04" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> EPEN<br><b>owner:</b> TUD<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_ce432e1d557f82e823d0bc0bfcc971d2.setContent(html_f58dafc313d936a7eae1bcbb26a21d04);
+            
+        
+
+        regular_polygon_marker_bf6218d0a9936b14f7e2556973779aa0.bindPopup(popup_ce432e1d557f82e823d0bc0bfcc971d2)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_49bbdd086927a8852fd1c118322f117e = new L.RegularPolygonMarker(
+                [51.979549612, 4.768544112],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_15d1cf3b7640a75bc74b4bde1daffe8b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a970154bc48c74b820261b7e929dffb7 = $(`<div id="html_a970154bc48c74b820261b7e929dffb7" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> STOLWIJK<br><b>owner:</b> TUD<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_15d1cf3b7640a75bc74b4bde1daffe8b.setContent(html_a970154bc48c74b820261b7e929dffb7);
+            
+        
+
+        regular_polygon_marker_49bbdd086927a8852fd1c118322f117e.bindPopup(popup_15d1cf3b7640a75bc74b4bde1daffe8b)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_9fd8b40445ffd5e4b0d5072fe735bf46 = new L.RegularPolygonMarker(
+                [52.23952616, 6.86357865],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_c0097483c6d461371b456d9935f6d672 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a885d59a05b217b99b8f5ecd4076cd40 = $(`<div id="html_a885d59a05b217b99b8f5ecd4076cd40" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ENSCHEDE<br><b>owner:</b> TUD<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_c0097483c6d461371b456d9935f6d672.setContent(html_a885d59a05b217b99b8f5ecd4076cd40);
+            
+        
+
+        regular_polygon_marker_9fd8b40445ffd5e4b0d5072fe735bf46.bindPopup(popup_c0097483c6d461371b456d9935f6d672)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_5e92610d1d14a6e9cf24910040d6a349 = new L.RegularPolygonMarker(
+                [51.3218333, 4.2500167],
+                {
+  "stroke": true,
+  "color": "#d62728",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#d62728",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_b94f6673266e48269b960701c3b68b60 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b35794d6c72d7be441e96fbdc07eb87d = $(`<div id="html_b35794d6c72d7be441e96fbdc07eb87d" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> DOEL<br><b>owner:</b> NGI<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> BEL</div>`)[0];
+                popup_b94f6673266e48269b960701c3b68b60.setContent(html_b35794d6c72d7be441e96fbdc07eb87d);
+            
+        
+
+        regular_polygon_marker_5e92610d1d14a6e9cf24910040d6a349.bindPopup(popup_b94f6673266e48269b960701c3b68b60)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_802c4cdb879759c0c319aee01eac541b = new L.RegularPolygonMarker(
+                [50.73742575, 5.95786907],
+                {
+  "stroke": true,
+  "color": "#d62728",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#d62728",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_ea458086068b96d509273b5c79b7f9ee = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8453ab61e7bb17645c286a0e9c495b11 = $(`<div id="html_8453ab61e7bb17645c286a0e9c495b11" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> PLOMBIERES-LIBRARY<br><b>owner:</b> NGI<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> BEL</div>`)[0];
+                popup_ea458086068b96d509273b5c79b7f9ee.setContent(html_8453ab61e7bb17645c286a0e9c495b11);
+            
+        
+
+        regular_polygon_marker_802c4cdb879759c0c319aee01eac541b.bindPopup(popup_ea458086068b96d509273b5c79b7f9ee)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_072984f9bd48e05db31743014b6308af = new L.RegularPolygonMarker(
+                [50.73879522, 5.96048776],
+                {
+  "stroke": true,
+  "color": "#d62728",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#d62728",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_0086a814903a5bceb38487a419916e77 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0ccfb8910a5966c6e0876446dae2d865 = $(`<div id="html_0ccfb8910a5966c6e0876446dae2d865" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> PLOMBIERES-CEMETARY<br><b>owner:</b> NGI<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> BEL</div>`)[0];
+                popup_0086a814903a5bceb38487a419916e77.setContent(html_0ccfb8910a5966c6e0876446dae2d865);
+            
+        
+
+        regular_polygon_marker_072984f9bd48e05db31743014b6308af.bindPopup(popup_0086a814903a5bceb38487a419916e77)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_a4693bee73a4c9f03d1555b911b10678 = new L.RegularPolygonMarker(
+                [52.4619836, 4.5560673],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 4,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_bc9029a0a90663767590bd0227be52ff = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1630e00a17beb638f94d715a21469c10 = $(`<div id="html_1630e00a17beb638f94d715a21469c10" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> IJMUIDEN<br><b>owner:</b> TUD<br><b>instrClass:</b> TR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_bc9029a0a90663767590bd0227be52ff.setContent(html_1630e00a17beb638f94d715a21469c10);
+            
+        
+
+        regular_polygon_marker_a4693bee73a4c9f03d1555b911b10678.bindPopup(popup_bc9029a0a90663767590bd0227be52ff)
+        ;
+
+        
+    
+    
+            var circle_marker_4f28dba5840941b970eea7ef4171cf8c = L.circleMarker(
+                [52.137411, 4.836308],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_3da9f21bdccda5c6fedd1d46924fe750 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_89792c31300894021a3fe78c0de31a24 = $(`<div id="html_89792c31300894021a3fe78c0de31a24" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ZEGVELD<br><b>owner:</b> HSR<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_3da9f21bdccda5c6fedd1d46924fe750.setContent(html_89792c31300894021a3fe78c0de31a24);
+            
+        
+
+        circle_marker_4f28dba5840941b970eea7ef4171cf8c.bindPopup(popup_3da9f21bdccda5c6fedd1d46924fe750)
+        ;
+
+        
+    
+    
+            var circle_marker_6872e563ad84b64cd9c60a13ad7cff5b = L.circleMarker(
+                [52.136849, 4.836484],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_ce5b8775744f6411ecb7de51320f3946 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_befaecc1dd3c24c3a4a54d9466a74350 = $(`<div id="html_befaecc1dd3c24c3a4a54d9466a74350" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ZEGVELD<br><b>owner:</b> HSR<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_ce5b8775744f6411ecb7de51320f3946.setContent(html_befaecc1dd3c24c3a4a54d9466a74350);
+            
+        
+
+        circle_marker_6872e563ad84b64cd9c60a13ad7cff5b.bindPopup(popup_ce5b8775744f6411ecb7de51320f3946)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_93123774b17636b5a644794060d9fe42 = new L.RegularPolygonMarker(
+                [52.13632, 4.840029],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 4,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_7634eb769bda2d1b605c285ec602f70e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_de1c78aa7b5ead9c6c2fc2ec7e6f683f = $(`<div id="html_de1c78aa7b5ead9c6c2fc2ec7e6f683f" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ZEGVELD<br><b>owner:</b> TUD<br><b>instrClass:</b> TR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_7634eb769bda2d1b605c285ec602f70e.setContent(html_de1c78aa7b5ead9c6c2fc2ec7e6f683f);
+            
+        
+
+        regular_polygon_marker_93123774b17636b5a644794060d9fe42.bindPopup(popup_7634eb769bda2d1b605c285ec602f70e)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_b443df5c016e42ad1c937c0f6d2d94ab = new L.RegularPolygonMarker(
+                [52.475874, 4.740044],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 4,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_145664542b0a83b15222cafa6fc935a3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_de74f06c5d80e6b66524f0d08a93806f = $(`<div id="html_de74f06c5d80e6b66524f0d08a93806f" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ASSENDELFT<br><b>owner:</b> TUD<br><b>instrClass:</b> TR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_145664542b0a83b15222cafa6fc935a3.setContent(html_de74f06c5d80e6b66524f0d08a93806f);
+            
+        
+
+        regular_polygon_marker_b443df5c016e42ad1c937c0f6d2d94ab.bindPopup(popup_145664542b0a83b15222cafa6fc935a3)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_15b21e3ba356429056d230cb2f9a9858 = new L.RegularPolygonMarker(
+                [53.05331, 5.904589],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 4,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_b5887582eaeabd74f859f85638475117 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_273936c7708d16068e628a6f74c4de53 = $(`<div id="html_273936c7708d16068e628a6f74c4de53" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ALDEBOARN<br><b>owner:</b> TUD<br><b>instrClass:</b> TR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_b5887582eaeabd74f859f85638475117.setContent(html_273936c7708d16068e628a6f74c4de53);
+            
+        
+
+        regular_polygon_marker_15b21e3ba356429056d230cb2f9a9858.bindPopup(popup_b5887582eaeabd74f859f85638475117)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_9cdc8adce4d85b9498fdde325dc8ea08 = new L.RegularPolygonMarker(
+                [53.053311, 5.904589],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 4,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_8c01f865f4bb24712c983053cd0e1340 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_72c92f7fb67668fbfb2340087b45e700 = $(`<div id="html_72c92f7fb67668fbfb2340087b45e700" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> ALDEBOARN<br><b>owner:</b> TUD<br><b>instrClass:</b> TR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_8c01f865f4bb24712c983053cd0e1340.setContent(html_72c92f7fb67668fbfb2340087b45e700);
+            
+        
+
+        regular_polygon_marker_9cdc8adce4d85b9498fdde325dc8ea08.bindPopup(popup_8c01f865f4bb24712c983053cd0e1340)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_48657d109ee7c0f854de706dbad15ce3 = new L.RegularPolygonMarker(
+                [53.25134, 6.9718219],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 4,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_023e4762f5fe68f07f164f2d576eed9d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_74d8c94fdc0f6531b2285e95880802c5 = $(`<div id="html_74d8c94fdc0f6531b2285e95880802c5" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> NIEUWOLDA<br><b>owner:</b> TUD<br><b>instrClass:</b> TR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_023e4762f5fe68f07f164f2d576eed9d.setContent(html_74d8c94fdc0f6531b2285e95880802c5);
+            
+        
+
+        regular_polygon_marker_48657d109ee7c0f854de706dbad15ce3.bindPopup(popup_023e4762f5fe68f07f164f2d576eed9d)
+        ;
+
+        
+    
+    
+            var circle_marker_e5871ccc398e51f621c2f5da2bd2cbae = L.circleMarker(
+                [51.98587, 4.390689],
+                {"bubblingMouseEvents": true, "color": "#e377c2", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e377c2", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_f656d262f6d9c82099b13e2b36119ab0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4af853ddca4d0620ef0df6b5a1428cc2 = $(`<div id="html_4af853ddca4d0620ef0df6b5a1428cc2" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> DELFT<br><b>owner:</b> TUD<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_f656d262f6d9c82099b13e2b36119ab0.setContent(html_4af853ddca4d0620ef0df6b5a1428cc2);
+            
+        
+
+        circle_marker_e5871ccc398e51f621c2f5da2bd2cbae.bindPopup(popup_f656d262f6d9c82099b13e2b36119ab0)
+        ;
+
+        
+    
+    
+            var circle_marker_432ef2e21b35258b19bc1d88b8b1d29d = L.circleMarker(
+                [51.986287, 4.390489],
+                {"bubblingMouseEvents": true, "color": "#e377c2", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e377c2", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_3aa0a7d030d216d1b285f4f435684f5c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_355616e14bf77ffc29087ffb936a2bdc = $(`<div id="html_355616e14bf77ffc29087ffb936a2bdc" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> DELFT<br><b>owner:</b> TUD<br><b>instrClass:</b> CR<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_3aa0a7d030d216d1b285f4f435684f5c.setContent(html_355616e14bf77ffc29087ffb936a2bdc);
+            
+        
+
+        circle_marker_432ef2e21b35258b19bc1d88b8b1d29d.bindPopup(popup_3aa0a7d030d216d1b285f4f435684f5c)
+        ;
+
+        
+    
+    
+            var regular_polygon_marker_3e131c74d40462b547d08f63d34fa797 = new L.RegularPolygonMarker(
+                [51.985277, 4.391016],
+                {
+  "stroke": true,
+  "color": "#e377c2",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#e377c2",
+  "fillOpacity": 0.9,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 7,
+  "numberOfSides": 3,
+  "rotation": 0,
+}
+            ).addTo(map_6401da9dcae5df4904614e134f073020);
+        
+    
+        var popup_2074b1160f547b86f9e93939b74c9aab = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_11043303a1dc06c59ce6830a6e5bbf42 = $(`<div id="html_11043303a1dc06c59ce6830a6e5bbf42" style="width: 100.0%; height: 100.0%;"><b>siteId:</b> DELFT<br><b>owner:</b> TUD<br><b>instrClass:</b> IGRS<br><b>countryCode:</b> NLD</div>`)[0];
+                popup_2074b1160f547b86f9e93939b74c9aab.setContent(html_11043303a1dc06c59ce6830a6e5bbf42);
+            
+        
+
+        regular_polygon_marker_3e131c74d40462b547d08f63d34fa797.bindPopup(popup_2074b1160f547b86f9e93939b74c9aab)
+        ;
+
+        
+    
+</script>
+</html>
