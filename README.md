@@ -1,6 +1,9 @@
 InSAR Mapper
 ---
-A command-line tool to filter and visualize **InSAR target data** on an interactive map using Folium. The map will be exported as HTML and GeoJSON.
+This small Python tool is designed to **filter and visualize InSAR target data** on an interactive map. It runs completely from the terminal and produces:
+
+- An **HTML map** you can open in a browser.
+- A **GeoJSON file** containing all filtered points that can be used for further analysis in GIS tools.
 
 ---
 
@@ -9,8 +12,8 @@ A command-line tool to filter and visualize **InSAR target data** on an interact
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/insar-mapper.git
-cd insar-mapper
+git clone https://github.com/HeikoRottebeel/InSAR_infrastructure_mapper
+cd InSAR_infrastructure_mapper
 ```
 
 2. Create a virtual environment (recommended):
@@ -26,6 +29,7 @@ pip install -r requirements.txt
 ```
 
 ## Usage
+You can run the script entirely from the terminal. At a minimum, you must provide the Excel file with your InSAR target data.
 
 Basic usage (with default filters):
 
@@ -54,3 +58,24 @@ Different arguments that can be used:
 | `--map-title`     | Title displayed at the top of the map                               | InSAR Target Locations |
 | `--save-html`     | Output HTML filename for the interactive map                        | insar_map.html |
 | `--save-geojson`  | Output GeoJSON filename for points                                  | insar_points.geojson |
+---
+
+## Examples
+
+Filter only one owner and one site:
+```
+python insar_mapper.py --file InSAR_designated_Target_Database.xlsx --owners TUD --siteId Delft
+```
+
+Use strict instrument class filtering:
+
+```
+python insar_mapper.py --file InSAR_designated_Target_Database.xlsx --instrClass CR IGRS --strict True
+```
+
+Change the map background and title:
+
+```
+python insar_mapper.py --file InSAR_designated_Target_Database.xlsx --background "Stamen Terrain" --map-title "My Custom InSAR Map"
+```
+
